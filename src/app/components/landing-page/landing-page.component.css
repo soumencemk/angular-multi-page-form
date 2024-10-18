@@ -1,0 +1,39 @@
+.landing-container {
+    text-align: center;
+    margin-top: 100px;
+    padding: 20px;
+  
+    h1 {
+      font-size: 2.5rem;
+      color: #3f51b5;
+      margin-bottom: 20px;
+    }
+  
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      color: #555;
+    }
+  
+    button {
+      font-size: 1rem;
+      padding: 10px 20px;
+    }
+  
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+  
+      p {
+        font-size: 1rem;
+        margin-bottom: 30px;
+      }
+  
+      button {
+        width: 80%;
+        padding: 12px 0;
+      }
+    }
+  }

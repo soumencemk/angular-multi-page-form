@@ -1,0 +1,47 @@
+<div class="container">
+    <h2>Step 1: Personal Information</h2>
+    <form [formGroup]="stepOneForm" (ngSubmit)="saveAndContinue()">
+      
+      <!-- First Name Field -->
+      <mat-form-field appearance="fill">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName" required>
+        <mat-error *ngIf="stepOneForm.get('firstName')?.hasError('required') && stepOneForm.get('firstName')?.touched">
+          First name is required.
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- Last Name Field -->
+      <mat-form-field appearance="fill">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName" required>
+        <mat-error *ngIf="stepOneForm.get('lastName')?.hasError('required') && stepOneForm.get('lastName')?.touched">
+          Last name is required.
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- Email Field -->
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" required email>
+        <mat-error *ngIf="stepOneForm.get('email')?.hasError('required') && stepOneForm.get('email')?.touched">
+          Email is required.
+        </mat-error>
+        <mat-error *ngIf="stepOneForm.get('email')?.hasError('email') && stepOneForm.get('email')?.touched">
+          Please enter a valid email address.
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- Phone Field -->
+      <mat-form-field appearance="fill">
+        <mat-label>Phone</mat-label>
+        <input matInput formControlName="phone" required>
+        <mat-error *ngIf="stepOneForm.get('phone')?.hasError('required') && stepOneForm.get('phone')?.touched">
+          Phone number is required.
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- Submit Button -->
+      <button mat-raised-button color="primary" type="submit" [disabled]="stepOneForm.invalid">Save & Continue</button>
+    </form>
+  </div>

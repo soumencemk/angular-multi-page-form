@@ -1,0 +1,38 @@
+<div class="container">
+    <mat-card>
+        <h2>Review & Confirmation</h2>
+        <mat-divider></mat-divider>
+        <div class="summary">
+            <h3>Personal Information</h3>
+            <p><strong>First Name:</strong> {{ data.personalInfo?.firstName }}</p>
+            <p><strong>Last Name:</strong> {{ data.personalInfo?.lastName }}</p>
+            <p><strong>Email:</strong> {{ data.personalInfo?.email }}</p>
+            <p><strong>Phone:</strong> {{ data.personalInfo?.phone }}</p>
+
+            <h3>Account Setup</h3>
+            <p><strong>Username:</strong> {{ data.accountSetup?.username }}</p>
+
+            <h3>Preferences</h3>
+            <p><strong>Notification Settings:</strong>
+                {{ data.preferences?.emailNotifications ? 'Email ' : '' }}
+                {{ data.preferences?.smsNotifications ? 'SMS ' : '' }}
+                {{ data.preferences?.pushNotifications ? 'Push ' : '' }}
+            </p>
+            <p><strong>Theme:</strong> {{ data.preferences?.theme }}</p>
+            <p><strong>Language:</strong> {{ data.preferences?.language }}</p>
+
+            <h3>Additional Information</h3>
+            <p><strong>Bio:</strong> {{ data.additionalInfo?.bio || 'N/A' }}</p>
+            <p><strong>LinkedIn:</strong>
+                <a *ngIf="data.additionalInfo?.linkedin" href="{{ data.additionalInfo.linkedin }}" target="_blank"
+                    rel="noopener noreferrer">{{ data.additionalInfo.linkedin }}</a>
+                <span *ngIf="!data.additionalInfo?.linkedin">N/A</span>
+            </p>
+        </div>
+
+        <div class="buttons">
+            <button mat-raised-button color="primary" (click)="confirmAndSubmit()">Confirm & Submit</button>
+            <button mat-button color="warn" (click)="edit()">Edit</button>
+        </div>
+    </mat-card>
+</div>

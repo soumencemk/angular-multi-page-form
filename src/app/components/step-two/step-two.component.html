@@ -1,0 +1,66 @@
+<div class="container">
+    <h2>Step 2: Account Setup</h2>
+    <form [formGroup]="stepTwoForm" (ngSubmit)="saveAndContinue()">
+
+        <!-- Username Field -->
+        <mat-form-field appearance="fill">
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="username" required>
+            <mat-error
+                *ngIf="stepTwoForm.get('username')?.hasError('required') && stepTwoForm.get('username')?.touched">
+                Username is required.
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Password Field with Visibility Toggle -->
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
+            <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword"
+                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error
+                *ngIf="stepTwoForm.get('password')?.hasError('required') && stepTwoForm.get('password')?.touched">
+                Password is required.
+            </mat-error>
+            <mat-error
+                *ngIf="stepTwoForm.get('password')?.hasError('minlength') && stepTwoForm.get('password')?.touched">
+                Password must be at least 8 characters long.
+            </mat-error>
+            <mat-error *ngIf="stepTwoForm.get('password')?.hasError('pattern') && stepTwoForm.get('password')?.touched">
+                Password must include uppercase, lowercase, number, and special character.
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Confirm Password Field with Visibility Toggle -->
+        <mat-form-field appearance="fill">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword"
+                required>
+            <button type="button" mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword"
+                [attr.aria-label]="'Hide confirm password'" [attr.aria-pressed]="hideConfirmPassword">
+                <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error
+                *ngIf="stepTwoForm.get('confirmPassword')?.hasError('required') && stepTwoForm.get('confirmPassword')?.touched">
+                Confirm Password is required.
+            </mat-error>
+            <mat-error
+                *ngIf="stepTwoForm.get('confirmPassword')?.hasError('passwordMismatch') && stepTwoForm.get('confirmPassword')?.touched">
+                Passwords do not match.
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Password Strength Indicator -->
+        <div class="password-strength" *ngIf="passwordStrength">
+            <p>Password Strength: <span [ngClass]="passwordStrength.class">{{passwordStrength.label}}</span></p>
+            <mat-progress-bar mode="determinate" [value]="passwordStrength.percentage"
+                [color]="passwordStrength.color"></mat-progress-bar>
+        </div>
+
+        <!-- Submit Button -->
+        <button mat-raised-button color="primary" type="submit" [disabled]="stepTwoForm.invalid">Save &
+            Continue</button>
+    </form>
+</div>

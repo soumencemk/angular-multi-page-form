@@ -1,0 +1,29 @@
+<div class="container">
+    <h2>Step 4: Additional Information (Optional)</h2>
+    <form [formGroup]="stepFourForm" (ngSubmit)="saveAndContinue()">
+
+        <!-- Short Bio Field -->
+        <mat-form-field appearance="fill">
+            <mat-label>Short Bio</mat-label>
+            <textarea matInput formControlName="bio" rows="4"
+                placeholder="Tell us a bit about yourself (optional)"></textarea>
+        </mat-form-field>
+
+        <!-- LinkedIn Profile URL Field -->
+        <mat-form-field appearance="fill">
+            <mat-label>LinkedIn Profile URL</mat-label>
+            <input matInput formControlName="linkedin" placeholder="https://www.linkedin.com/in/yourprofile">
+            <mat-error
+                *ngIf="stepFourForm.get('linkedin')?.hasError('pattern') && stepFourForm.get('linkedin')?.touched">
+                Enter a valid URL.
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Submit and Skip Buttons -->
+        <div class="button-group">
+            <button mat-raised-button color="primary" type="submit" [disabled]="stepFourForm.invalid">Save &
+                Continue</button>
+            <button mat-button type="button" (click)="skip()">Skip</button>
+        </div>
+    </form>
+</div>

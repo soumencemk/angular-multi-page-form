@@ -1,0 +1,51 @@
+<div class="container">
+    <h2>Step 3: Preferences</h2>
+    <form [formGroup]="stepThreeForm" (ngSubmit)="saveAndContinue()">
+
+        <!-- Notification Settings -->
+        <label class="notification-label">Notification Settings:</label>
+        <div class="checkbox-group">
+            <mat-checkbox formControlName="emailNotifications">Email</mat-checkbox>
+            <mat-checkbox formControlName="smsNotifications">SMS</mat-checkbox>
+            <mat-checkbox formControlName="pushNotifications">Push Notifications</mat-checkbox>
+        </div>
+
+        <!-- Error Message for Notification Settings -->
+        <div *ngIf="notificationError" class="error-message">
+            <mat-error>At least one notification method must be selected.</mat-error>
+        </div>
+
+        <!-- Theme Selection -->
+        <mat-form-field appearance="fill">
+            <mat-label>Theme Selection</mat-label>
+            <mat-select formControlName="theme" required>
+                <mat-option value="light">Light Mode</mat-option>
+                <mat-option value="dark">Dark Mode</mat-option>
+                <mat-option value="custom">Custom Theme</mat-option>
+            </mat-select>
+            <mat-error *ngIf="stepThreeForm.get('theme')?.hasError('required') && stepThreeForm.get('theme')?.touched">
+                Theme selection is required.
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Language Preference -->
+        <mat-form-field appearance="fill">
+            <mat-label>Language Preference</mat-label>
+            <mat-select formControlName="language" required>
+                <mat-option value="en">English</mat-option>
+                <mat-option value="es">Spanish</mat-option>
+                <mat-option value="fr">French</mat-option>
+                <mat-option value="de">German</mat-option>
+            </mat-select>
+            <mat-error
+                *ngIf="stepThreeForm.get('language')?.hasError('required') && stepThreeForm.get('language')?.touched">
+                Language selection is required.
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Submit Button -->
+        <button mat-raised-button color="primary" type="submit" [disabled]="stepThreeForm.invalid || notificationError">
+            Save & Continue
+        </button>
+    </form>
+</div>
